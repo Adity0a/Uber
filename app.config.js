@@ -1,0 +1,60 @@
+import "dotenv/config";
+
+export default {
+  expo: {
+    name: "Uber",
+    slug: "uber",
+    version: "1.0.0",
+    orientation: "portrait",
+    icon: "./assets/images/adaptive-icon.png",
+    scheme: "myapp",
+    userInterfaceStyle: "automatic",
+    splash: {
+      image: "./assets/images/splash.png",
+      resizeMode: "contain",
+      backgroundColor: "#2F80ED",
+    },
+    ios: {
+      supportsTablet: true,
+    },
+    android: {
+      adaptiveIcon: {
+        foregroundImage: "./assets/images/adaptive-icon.png",
+        backgroundColor: "#ffffff",
+      },
+      config: {
+        googleMaps: {
+          apiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
+        },
+      },
+      package: "com.aditya.uber",
+    },
+    web: {
+      bundler: "metro",
+      output: "server",
+      favicon: "./assets/images/adaptive-icon.png",
+    },
+    plugins: [
+      [
+        "expo-router",
+        {
+          origin: "https://uber.dev/",
+        },
+      ],
+      "expo-secure-store",
+      [
+        "@stripe/stripe-react-native",
+        {
+          merchantIdentifier: "merchant.uber.com",
+          enableGooglePay: true,
+        },
+      ],
+    ],
+    experiments: {
+      typedRoutes: true,
+    },
+    extra: {
+      clerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    },
+  },
+};
